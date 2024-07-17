@@ -1,0 +1,44 @@
+.employee-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .employee-item div {
+    flex-grow: 1;
+  }
+  
+  .employee-item strong {
+    display: block;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+  }
+  
+  .employee-item p {
+    margin: 5px 0;
+  }
+  
+  .employee-item button {
+    margin-left: 10px;
+    padding: 8px 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .employee-item button:hover {
+    background: #0056b3;
+  }
+  
+  .employee-item button:nth-child(2) {
+    background: #dc3545;
+  }
+  
+  .employee-item button:nth-child(2):hover {
+    background: #c82333;
+  }
+  
