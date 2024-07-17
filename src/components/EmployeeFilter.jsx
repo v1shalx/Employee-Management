@@ -12,7 +12,7 @@ const EmployeeFilter = ({ onFilterChange }) => {
 
   return (
     <div className="employee-filter">
-      <label>Filter by name, email, or position:</label>
+      <label>Search Records:</label>
       <input
         type="text"
         value={filter}
