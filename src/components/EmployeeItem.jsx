@@ -2,10 +2,13 @@ import React from 'react';
 import './EmployeeItem.css'; // Adjust CSS import path as per your project structure
 
 const EmployeeItem = ({ employee, onDelete, onEdit }) => {
-  const { _id, name, mobile, email, position, salary } = employee;
+  console.log('Employee in EmployeeItem:', employee); // Log employee data to check its structure
+
+  const { _id, employeeId, name, mobile, email, position, salary } = employee;
 
   return (
     <tr className="employee-item">
+      <td>{employeeId || ''}</td> {/* Ensure employeeId is defined or provide a default */}
       <td>{name}</td>
       <td>{mobile}</td>
       <td>{email}</td>

@@ -1,3 +1,5 @@
+/* EmployeeList.css */
+
 .employee-list {
     max-width: 800px;
     margin: 20px auto;
@@ -5,10 +7,10 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     background-color: #fff;
+    text-align: center; /* Center align contents */
   }
   
   .employee-list h2 {
-    text-align: center;
     margin-bottom: 20px;
   }
   
@@ -18,7 +20,8 @@
     margin-top: 20px;
   }
   
-  .employee-list th, .employee-list td {
+  .employee-list th,
+  .employee-list td {
     padding: 12px;
     text-align: center;
   }
@@ -33,9 +36,8 @@
   }
   
   .employee-list .action-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
   
   .employee-list .action-buttons button {

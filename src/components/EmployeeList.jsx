@@ -24,10 +24,8 @@ const EmployeeList = () => {
     setError(null);
 
     try {
-      const fetchedEmployees = await api.getAll(page, limit, '-createdAt', filter);
-      // Reverse the order to display the latest added first
-      const reversedEmployees = fetchedEmployees.reverse();
-      setEmployees(reversedEmployees);
+      const fetchedEmployees = await api.getAll(page, limit, 'createdAt', filter); // Fetch in ascending order
+      setEmployees(fetchedEmployees);
     } catch (error) {
       setError(error);
     }
@@ -63,15 +61,12 @@ const EmployeeList = () => {
   // Function to filter employees based on the current filter value
   const filteredEmployees = employees.filter((employee) => {
     // Check if any field (converted to lowercase string) contains the filter string
-    const searchableFields = ['name', 'mobile', 'email', 'position', 'salary'];
+    const searchableFields = ['employeeId', 'name', 'mobile', 'email', 'position', 'salary'];
     return searchableFields.some((field) => {
-      if (field === 'salary') {
-        // For salary, check if it matches the exact filter value
-        return employee[field].toString().toLowerCase().includes(filter.toLowerCase());
-      } else {
-        // For other fields, check if they contain the filter string
-        return employee[field].toString().toLowerCase().includes(filter.toLowerCase());
-      }
+      // Ensure employee[field] is not undefined before calling .toString()
+      const value = employee[field];
+      if (value === undefined || value === null) return false;
+      return value.toString().toLowerCase().includes(filter.toLowerCase());
     });
   });
 
@@ -117,6 +112,7 @@ const EmployeeList = () => {
           <table>
             <thead>
               <tr>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Mobile</th>
                 <th>Email</th>
@@ -127,27 +123,21 @@ const EmployeeList = () => {
             </thead>
             <tbody>
               {displayedEmployees.map((employee) => (
-                <tr key={employee._id}>
-                  <td>{employee.name}</td>
-                  <td>{employee.mobile}</td>
-                  <td>{employee.email}</td>
-                  <td>{employee.position}</td>
-                  <td>{employee.salary}</td>
-                  <td className="action-buttons">
-                    <button onClick={() => handleEdit(employee)}>Edit</button>
-                    <button onClick={() => window.confirm('Are you sure you want to delete this employee?') && handleDelete(employee._id)}>Delete</button>
-                  </td>
-                </tr>
+                <EmployeeItem
+                  key={employee._id}
+                  employee={employee}
+                  onDelete={handleDelete}
+                  onEdit={handleEdit}
+                />
               ))}
             </tbody>
           </table>
           {/* Pagination controls */}
           <div className="pagination">
-  <button disabled={page === 1} onClick={prevPage}>Previous</button>
-  <span>{page}/{totalPages}</span>
-  <button disabled={page === totalPages} onClick={nextPage}>Next</button>
-</div>
-
+            <button disabled={page === 1} onClick={prevPage}>Previous</button>
+            <span>{page}/{totalPages}</span>
+            <button disabled={page === totalPages} onClick={nextPage}>Next</button>
+          </div>
         </React.Fragment>
       )}
     </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './EmployeeForm.css'; // Adjust CSS import path as per your project structure
-import api from '../services/api'; // Adjust API import path as per your project structure
+import './EmployeeForm.css';
+import api from '../services/api'; // Adjust import path as per your project structure
 
 const EmployeeForm = ({ onSubmit, editEmployee, onClose }) => {
   const [name, setName] = useState('');
@@ -12,11 +12,11 @@ const EmployeeForm = ({ onSubmit, editEmployee, onClose }) => {
 
   useEffect(() => {
     if (editEmployee) {
-      setName(editEmployee.name);
-      setMobile(editEmployee.mobile);
-      setEmail(editEmployee.email);
-      setPosition(editEmployee.position);
-      setSalary(editEmployee.salary.toString()); // Ensure salary is set as a string for input compatibility
+      setName(editEmployee.name || '');
+      setMobile(editEmployee.mobile || '');
+      setEmail(editEmployee.email || '');
+      setPosition(editEmployee.position || '');
+      setSalary(editEmployee.salary ? editEmployee.salary.toString() : '');
     }
   }, [editEmployee]);
 
@@ -28,7 +28,7 @@ const EmployeeForm = ({ onSubmit, editEmployee, onClose }) => {
         mobile,
         email,
         position,
-        salary: Number(salary), // Ensure salary is parsed as a number
+        salary: Number(salary),
       };
 
       if (editEmployee) {
