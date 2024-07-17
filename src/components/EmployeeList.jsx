@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './EmployeeList.css'
+import './EmployeeList.css';
 import EmployeeItem from './EmployeeItem';
 import EmployeeFilter from './EmployeeFilter';
 import EmployeeForm from './EmployeeForm';
@@ -12,17 +12,19 @@ const EmployeeList = () => {
   const [editEmployee, setEditEmployee] = useState(null);
   const [filter, setFilter] = useState('');
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [page, setPage] = useState(1); // Current page
+  const limit = 5; // Items per page
 
   useEffect(() => {
     fetchEmployees();
-  }, [filter]);
+  }, [filter, page]); // Update when filter or page changes
 
   const fetchEmployees = async () => {
     setLoading(true);
     setError(null);
 
     try {
-      const fetchedEmployees = await api.getAll(1, 10, '-createdAt', filter);
+      const fetchedEmployees = await api.getAll(page, limit, '-createdAt', filter);
       // Reverse the order to display the latest added first
       const reversedEmployees = fetchedEmployees.reverse();
       setEmployees(reversedEmployees);
@@ -50,6 +52,7 @@ const EmployeeList = () => {
 
   const handleFilterChange = (value) => {
     setFilter(value); // Update filter state with the new filter value
+    setPage(1); // Reset page to 1 when filter changes
   };
 
   const handleFormClose = () => {
@@ -72,6 +75,25 @@ const EmployeeList = () => {
     });
   });
 
+  // Calculate total pages
+  const totalPages = Math.ceil(filteredEmployees.length / limit);
+
+  // Pagination controls
+  const nextPage = () => {
+    if (page < totalPages) {
+      setPage(page + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
+
+  // Slice employees to display only the current page
+  const displayedEmployees = filteredEmployees.slice((page - 1) * limit, page * limit);
+
   return (
     <div className="employee-list">
       <h2>Employee List</h2>
@@ -88,34 +110,45 @@ const EmployeeList = () => {
         <div>Loading...</div>
       ) : error ? (
         <div>Error: {error.message}</div>
+      ) : filteredEmployees.length === 0 ? (
+        <div>No employees found.</div>
       ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Mobile</th>
-              <th>Email</th>
-              <th>Position</th>
-              <th>Salary</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredEmployees.map((employee) => (
-              <tr key={employee._id}>
-                <td>{employee.name}</td>
-                <td>{employee.mobile}</td>
-                <td>{employee.email}</td>
-                <td>{employee.position}</td>
-                <td>{employee.salary}</td>
-                <td className="action-buttons">
-                  <button onClick={() => handleEdit(employee)}>Edit</button>
-                  <button onClick={() => window.confirm('Are you sure you want to delete this employee?') && handleDelete(employee._id)}>Delete</button>
-                </td>
+        <React.Fragment>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>Position</th>
+                <th>Salary</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {displayedEmployees.map((employee) => (
+                <tr key={employee._id}>
+                  <td>{employee.name}</td>
+                  <td>{employee.mobile}</td>
+                  <td>{employee.email}</td>
+                  <td>{employee.position}</td>
+                  <td>{employee.salary}</td>
+                  <td className="action-buttons">
+                    <button onClick={() => handleEdit(employee)}>Edit</button>
+                    <button onClick={() => window.confirm('Are you sure you want to delete this employee?') && handleDelete(employee._id)}>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {/* Pagination controls */}
+          <div className="pagination">
+  <button disabled={page === 1} onClick={prevPage}>Previous</button>
+  <span>{page}/{totalPages}</span>
+  <button disabled={page === totalPages} onClick={nextPage}>Next</button>
+</div>
+
+        </React.Fragment>
       )}
     </div>
   );
