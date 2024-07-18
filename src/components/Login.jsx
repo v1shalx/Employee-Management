@@ -1,9 +1,7 @@
-// src/components/Login.jsx
-
 import React, { useState } from 'react';
 import AuthService from '../services/AuthService';
 import { useNavigate } from 'react-router-dom';
-import './Login.css'
+import './Login.css';
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
@@ -23,30 +21,38 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className="login-form">
-      <h2>Login</h2>
-      {error && <div className="error-message">{error}</div>}
-      <form onSubmit={handleLogin}>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+    <div className="login-container">
+      <div className="login-form">
+        <div className="form-header">
+          <h2>Login</h2>
         </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+        <div className="form-body">
+          {error && <div className="error-message">{error}</div>}
+          <form onSubmit={handleLogin}>
+            <div className="form-group">
+              <label htmlFor="emailInput">Email</label>
+              <input
+                id="emailInput"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="passwordInput">Password</label>
+              <input
+                id="passwordInput"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <button type="submit">Login</button>
+          </form>
         </div>
-        <button type="submit">Login</button>
-      </form>
+      </div>
     </div>
   );
 };

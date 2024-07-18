@@ -15,7 +15,7 @@ const EmployeeItem = ({ employee, onDelete, onEdit }) => {
       <td>{position}</td>
       <td>{salary}</td>
       <td className="action-buttons">
-        <button onClick={() => onEdit(employee)}>Edit</button>
+        <button className='editbutton' onClick={() => onEdit(employee)}>Edit</button>
         <button onClick={() => window.confirm('Are you sure you wish to delete this item?') && onDelete(_id)}>Delete</button>
       </td>
     </tr>

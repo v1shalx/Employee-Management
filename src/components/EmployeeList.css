@@ -1,7 +1,7 @@
 /* EmployeeList.css */
 
 .employee-list {
-    max-width: 800px;
+    width: 80%;
     margin: 20px auto;
     padding: 20px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);

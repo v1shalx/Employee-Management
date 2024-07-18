@@ -1,37 +1,54 @@
 .employee-form {
-    background: #f9f9f9;
+    background: #fff;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-    
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 20px;
   }
   
   .employee-form h2 {
     margin-top: 0;
+    font-size: 24px;
+    color: #333;
   }
   
   .employee-form label {
     display: block;
-    margin-top: 10px;
+    margin-top: 15px;
+    font-size: 16px;
+    color: #555;
+    text-align: left;
   }
   
   .employee-form input {
-    width: 100%;
-    padding: 8px;
+    width: calc(100% - 16px);
+    padding: 10px;
     margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+    box-sizing: border-box;
+  }
+  
+  .employee-form input:focus {
+    border-color: #007bff;
   }
   
   .employee-form button {
     margin-top: 20px;
-    padding: 10px 15px;
+    padding: 12px 24px;
     background: #007bff;
-    color: white;
+    color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+    margin-left: 20px;
   }
   
   .employee-form button[type="button"] {

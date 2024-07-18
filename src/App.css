@@ -1,7 +1,12 @@
 /* App.css */
 
 .App {
-  font-family: Arial, sans-serif;
+  width: 80%; /* Takes up 80% of the screen width */
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin: 0 auto;
 }
 
 header {
@@ -9,6 +14,11 @@ header {
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  text-align: center; /* Center align all content within the header */
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
@@ -26,6 +36,7 @@ header h1 {
   cursor: pointer;
   font-size: 14px;
   border-radius: 4px;
+  width: auto;
 }
 
 .logout-button:hover {
