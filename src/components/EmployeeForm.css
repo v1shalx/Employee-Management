@@ -35,13 +35,13 @@
   }
   
   .employee-form input:focus {
-    border-color: #007bff;
+    border-color: #ddff00;
   }
   
   .employee-form button {
     margin-top: 20px;
     padding: 12px 24px;
-    background: #007bff;
+    background: #0ddd06;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -52,7 +52,7 @@
   }
   
   .employee-form button[type="button"] {
-    background: #dc3545;
+    background: #36e50a;
   }
   
   .employee-form button:hover {

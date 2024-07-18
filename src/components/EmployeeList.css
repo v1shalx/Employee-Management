@@ -42,7 +42,7 @@
   
   .employee-list .action-buttons button {
     padding: 8px 12px;
-    background-color: #007bff;
+    background-color: #2de908;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -61,7 +61,7 @@
   
   .employee-list .pagination button {
     padding: 8px 12px;
-    background-color: #007bff;
+    background-color: #39d20a;
     color: #fff;
     border: none;
     cursor: pointer;
